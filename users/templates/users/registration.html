@@ -2,11 +2,11 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-    Login
+    Registration
 {% endblock %}
 
 {% block container %}
-    <h1>login</h1>
+    <h1>Register</h1>
 
     <form action="" method="post">
 
@@ -14,7 +14,7 @@
 
         {{ form|crispy }}
 
-    <p>Don`t have an account? Pay now 10 Btc or <a href="{% url 'users:registration' %}">Signup</a></p>
+    <p>Already have an account?<a href="{% url 'users:login' %}">Login</a></p>
 
     <button type="submit" class="btn-primary">Submit</button>
 
