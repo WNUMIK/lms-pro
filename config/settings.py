@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
     # local
     'home.apps.HomeConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -153,3 +154,5 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 LOGIN_REDIRECT_URL = 'home:home'
 LOGOUT_REDIRECT_URL = 'home:home'
+
+AUTH_USER_MODEL = 'users.Account'
