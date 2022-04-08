@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import Permission, Group
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -38,7 +39,16 @@ def registration_view(request):
             user = form.save(commit=False)
             user.is_active = True
             user.save()
-            # TODO add permission for courses
+            if form.cleaned_data['is_instructor'] is True:
+                permission = Permission.objects.get(name='Can add course')
+                instructor_group = Group.objects.get(name='instructors')
+                user.groups.add(instructor_group)
+                user.user_permissions.add(permission)
+            else:
+                permission = Permission.objects.get(name='Can view course')
+                students_group = Group.objects.get(name='students')
+                user.group.add(students_group)
+                user.user_permissions.add(permission)
 
             return redirect(reverse_lazy('users:login'))
     return render(request, 'users/registration.html', {'form': form})
